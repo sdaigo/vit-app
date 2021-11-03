@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision Transformer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/static/app.js"></script>
+</head>
+<body>
+  <form id="form__upload" method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/jpg" />
+    <button id="btn__upload" type="submit">Upload</button>
+  </form>
+  {% if saved_image_path %}
+  <p>
+    <img id="uploaded-path" width="50%" src="{{ saved_image_path }}" />
+  </p>
+  <form id="form__recognition" method="post" action="{{ url_for('recognition') }}">
+    <input type="hidden" name="image_path" value="{{ saved_image_path }}" />
+    <button type="submit">画像認識</button>
+  </form>
+  {% endif %}
+  {% if predicted_label %}
+  predicted: <strong>{{ predicted_label }}</strong>
+  {% endif %}
+</body>
+</html>
